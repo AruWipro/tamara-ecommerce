@@ -26,7 +26,7 @@ public class OrderController {
 		return orderService.createOrder(order);
 	}
 
-	@GetMapping(path = "/orders/{id}",consumes = "application/json", produces = "application/json")
+	@GetMapping(path = "/orders/{id}", produces = "application/json")
 	public Order getOrder(@Valid @PathVariable String id) {
 		System.out.println("Id is"+ id);
 		return orderService.getOrderById(new Long(id));
