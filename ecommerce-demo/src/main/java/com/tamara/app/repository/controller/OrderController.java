@@ -27,8 +27,8 @@ public class OrderController {
 	}
 
 	@GetMapping(path = "/orders/{id}", produces = "application/json")
-	public Order getOrder(@Valid @PathVariable String id) {
+	public Order getOrder(@Valid @PathVariable Long id) {
 		System.out.println("Id is"+ id);
-		return orderService.getOrderById(new Long(id));
+		return orderService.getOrderById(id);
 	}
 }
