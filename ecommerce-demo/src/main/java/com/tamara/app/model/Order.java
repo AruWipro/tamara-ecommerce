@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -44,6 +45,8 @@ public class Order {
     @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "order_id",referencedColumnName = "id",insertable = false,updatable = false)
     @Fetch(value = FetchMode.SUBSELECT)
+    @NotNull
+    @Valid
     private List<OrderItem> orderItems;
     
     public Order() {}
