@@ -24,7 +24,7 @@ public class OrderPaymentController {
 		System.out.println("Id is"+ id);
 		 ResponseEntity<Object> paymentRespose = orderService.payOrder(id);
 		 if(paymentRespose.getStatusCodeValue() == 200) {
-			 return new ResponseEntity<Payment>(new Payment(id, "Payment done"),HttpStatus.CREATED);
+			 return new ResponseEntity<Object>(paymentRespose.getBody(),HttpStatus.CREATED);
 		 }else {
 			 return new ResponseEntity<Payment>(new Payment(id, "Service Unavilable"),HttpStatus.SERVICE_UNAVAILABLE);
 		 }
