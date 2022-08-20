@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tamara.app.model.Payment;
 import com.tamara.app.repository.service.OrderService;
 
 @RestController
@@ -19,13 +20,13 @@ public class OrderPaymentController {
 		this.orderService = orderService;
 	}
 	@PostMapping("/{id}")
-	public Object payOrder(@Valid @PathVariable String id) {
+	public Object payOrder(@Valid @PathVariable Long id) {
 		System.out.println("Id is"+ id);
-		 ResponseEntity<Object> paymentRespose = orderService.payOrder(new Long(id));
+		 ResponseEntity<Object> paymentRespose = orderService.payOrder(id);
 		 if(paymentRespose.getStatusCodeValue() == 200) {
-			 return new ResponseEntity<>(null,HttpStatus.CREATED);
+			 return new ResponseEntity<Payment>(new Payment(id, "Payment done"),HttpStatus.CREATED);
 		 }else {
-			 return new ResponseEntity<>(null,HttpStatus.SERVICE_UNAVAILABLE);
+			 return new ResponseEntity<Payment>(new Payment(id, "Service Unavilable"),HttpStatus.SERVICE_UNAVAILABLE);
 		 }
 	}
 }
