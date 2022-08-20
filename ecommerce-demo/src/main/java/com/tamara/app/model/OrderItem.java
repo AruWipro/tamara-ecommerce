@@ -24,13 +24,16 @@ public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderItemId;
-
+    
+    @NotNull(message = "SkuID is mandatory field")
     @Column(name = "skuid")
     private @NotNull Long skuId;
 
+    @NotNull(message = "Quantity is mandatory field")
     @Column(name = "quantity")
     private @NotNull int quantity;
 
+    @NotNull(message = "Item Price is mandatory field")
     @Column(name = "price")
     private @NotNull double price;
 
