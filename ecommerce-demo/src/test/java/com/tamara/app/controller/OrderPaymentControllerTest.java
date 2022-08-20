@@ -21,18 +21,18 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.tamara.app.exception.OrderNotFoundException;
-import com.tamara.app.repository.controller.OrderPaymentController;
-import com.tamara.app.repository.service.OrderService;
+import com.tamara.app.repository.controller.PaymentController;
+import com.tamara.app.repository.service.IOrderService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class OrderPaymentControllerTest {
 	@InjectMocks
-	OrderPaymentController orderPaymentController;
+	PaymentController orderPaymentController;
 	
 	@Mock
-	OrderService orderService;
+	IOrderService orderService;
 	
 
 	@Test

@@ -18,12 +18,22 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+/**
+ * @author Aravind P
+ * This is a controller Advice and it handles all the exceptions globally
+ */
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
+    /**
+     * @param ex
+     * @param request
+     * @return ResponseEntity
+     * This method prepares a custom error object and returns the response entity
+     */
     @ExceptionHandler(OrderNotFoundException.class)
     public ResponseEntity<Object> handleOrderNotFoundException(
-        OrderNotFoundException ex, WebRequest request) {
+        OrderNotFoundException ex) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
@@ -33,6 +43,11 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
     }
     
 
+    /**
+     * @param ex
+     * @return ResponseEntity
+     * this method is responsible to handle all the Bean vlaidations
+     */
     @ExceptionHandler(ConstraintViolationException.class)
     public final ResponseEntity<?> handleConstraintViolationExceptions(
         ConstraintViolationException ex) {
@@ -43,6 +58,7 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
       return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
     
+   
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers,

@@ -13,13 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tamara.app.model.Order;
-import com.tamara.app.repository.service.OrderService;
+import com.tamara.app.repository.service.IOrderService;
 
 @RestController
 @RequestMapping("/api/v1")
+/**
+ * 
+ * @author Aravind
+ * This class is responsible handle order related endpoints
+ *
+ */
 public class OrderController {
 	@Autowired
-	OrderService orderService;
+	IOrderService orderService;
 
 	@PostMapping(path = "/orders", consumes = "application/json", produces = "application/json")
 	public Order placeOrder(@Valid @NotEmpty @RequestBody Order order) {

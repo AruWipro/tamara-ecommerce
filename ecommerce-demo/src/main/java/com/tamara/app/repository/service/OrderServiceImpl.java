@@ -13,10 +13,9 @@ import com.tamara.app.exception.RestTemplateResponseErrorHandler;
 import com.tamara.app.model.Order;
 import com.tamara.app.model.OrderItem;
 import com.tamara.app.repository.OrderRepository;
-import com.tamara.app.repository.config.RestTemplateConfig;
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class OrderServiceImpl implements IOrderService {
 	
     @Autowired
 	private OrderItemsService orderItemsService;
@@ -35,6 +34,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public Order createOrder(Order order) {
+		// first save the order with mandatory params and then persist the line items
 		Order savedOrder = saveOrder(order);
 		List<OrderItem> orderItemsList = order.getOrderItems();
 		for(OrderItem item: orderItemsList) {

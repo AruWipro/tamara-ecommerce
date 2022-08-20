@@ -10,18 +10,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tamara.app.model.Payment;
-import com.tamara.app.repository.service.OrderService;
+import com.tamara.app.repository.service.IOrderService;
 
+/**
+ * @author apple
+ * This Rest Controller takes care of hosting payment related APIs
+ */
 @RestController
 @RequestMapping("/api/v1/pay")
-public class OrderPaymentController {
-	OrderService orderService;
-	public OrderPaymentController(OrderService orderService) {
+public class PaymentController {
+	
+	IOrderService orderService;
+	// Constructor Injection
+	public PaymentController(IOrderService orderService) {
 		this.orderService = orderService;
 	}
+	
+	/**
+	 * @param id
+	 * @return
+	 * Consumes OrderId and makes a call to another API -> Constructs response and posts it back
+	 */
 	@PostMapping("/{id}")
 	public ResponseEntity<?> payOrder(@Valid @PathVariable Long id) {
-		System.out.println("Id is"+ id);
 		 ResponseEntity<Object> paymentRespose = orderService.payOrder(id);
 		 if(paymentRespose.getStatusCodeValue() == 200) {
 			 return new ResponseEntity<Object>(paymentRespose.getBody(),HttpStatus.CREATED);

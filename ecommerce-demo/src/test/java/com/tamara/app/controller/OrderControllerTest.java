@@ -23,7 +23,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.tamara.app.exception.OrderNotFoundException;
 import com.tamara.app.model.Order;
 import com.tamara.app.repository.controller.OrderController;
-import com.tamara.app.repository.service.OrderService;
+import com.tamara.app.repository.service.IOrderService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -32,7 +32,7 @@ public class OrderControllerTest {
 	OrderController orderController;
 
 	@Mock
-	OrderService orderService;
+	IOrderService orderService;
 
 	@Test
 	public void whenOrderIsPosted_thenReturnSuccess() {
