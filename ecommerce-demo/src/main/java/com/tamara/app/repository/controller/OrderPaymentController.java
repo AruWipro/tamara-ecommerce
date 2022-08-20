@@ -20,7 +20,7 @@ public class OrderPaymentController {
 		this.orderService = orderService;
 	}
 	@PostMapping("/{id}")
-	public Object payOrder(@Valid @PathVariable Long id) {
+	public ResponseEntity<?> payOrder(@Valid @PathVariable Long id) {
 		System.out.println("Id is"+ id);
 		 ResponseEntity<Object> paymentRespose = orderService.payOrder(id);
 		 if(paymentRespose.getStatusCodeValue() == 200) {
